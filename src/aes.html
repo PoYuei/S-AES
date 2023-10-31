@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html {
+        height: 100%;
+    }
+    body {
+        margin:0;
+        padding:0;
+        font-family: sans-serif;
+        background-image: url('AESui.png');
+    }
+
+    .aes-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        padding: 40px;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,.7);
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0,0,0,0.6);
+        border-radius: 10px;
+    }
+
+    .aes-box h2 {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+
+    .aes-box .user-box {
+        position: relative;
+    }
+
+    .aes-box .user-box input {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        background: transparent;
+    }
+    .aes-box .user-box label {
+        position: absolute;
+        top:0;
+        left: 0;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        pointer-events: none;
+        transition: .5s;
+    }
+
+    .aes-box .user-box input:focus ~ label,
+    .aes-box .user-box input:valid ~ label {
+        top: -20px;
+        left: 0;
+        color: #03e9f4;
+        font-size: 12px;
+    }
+
+    .aes-box form a {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: .5s;
+        margin-top: 40px;
+        letter-spacing: 4px
+    }
+
+    .aes-box a:hover {
+        background: #03e9f4;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4,
+        0 0 25px #03e9f4,
+        0 0 50px #03e9f4,
+        0 0 100px #03e9f4;
+    }
+
+    .aes-box a span {
+        position: absolute;
+        display: block;
+    }
+
+    .aes-box a span:nth-child(1) {
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #03e9f4);
+        animation: btn-anim1 1s linear infinite;
+    }
+
+    @keyframes btn-anim1 {
+        0% {
+            left: -100%;
+        }
+        50%,100% {
+            left: 100%;
+        }
+    }
+
+    .aes-box a span:nth-child(2) {
+        top: -100%;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, #03e9f4);
+        animation: btn-anim2 1s linear infinite;
+        animation-delay: .25s
+    }
+
+    @keyframes btn-anim2 {
+        0% {
+            top: -100%;
+        }
+        50%,100% {
+            top: 100%;
+        }
+    }
+
+    .aes-box a span:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, #03e9f4);
+        animation: btn-anim3 1s linear infinite;
+        animation-delay: .5s
+    }
+
+    @keyframes btn-anim3 {
+        0% {
+            right: -100%;
+        }
+        50%,100% {
+            right: 100%;
+        }
+    }
+
+    .aes-box a span:nth-child(4) {
+        bottom: -100%;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(360deg, transparent, #03e9f4);
+        animation: btn-anim4 1s linear infinite;
+        animation-delay: .75s
+    }
+
+    .aes-box .user-box label.label-highlight {
+        top: -20px;
+        left: 0;
+        color: #03e9f4;
+        font-size: 12px;
+    }
+
+
+    @keyframes btn-anim4 {
+        0% {
+            bottom: -100%;
+        }
+        50%,100% {
+            bottom: 100%;
+        }
+    }
+    .aes-box .user-box label.shrink {
+        top: -20px;
+        left: 0;
+        color: #03e9f4;
+        font-size: 12px;
+    }
+    .encryption-level label {
+        color: white;
+    }
+
+</style>
+<script>
+    function singleEncrypt() {
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        return "加密结果: " + java.encryption(before, key0);
+    }
+
+    function singleDecrypt() {
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        return "解密结果: " + java.decryption(before, key0);
+    }
+
+    function doubleEncrypt() {
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        return "加密结果: " + java.double_encryption(before, key0);
+    }
+
+    function doubleDecrypt() {
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        return "解密结果: " + java.double_decryption(before, key0);
+    }
+
+    function tripleEncrypt() {
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        return "加密结果: " + java.triple_encryption(before, key0);
+    }
+
+    function tripleDecrypt() {
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        return "解密结果: " + java.triple_decryption(before, key0);
+    }
+
+    function acc_aes0(){
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        result = "加密结果: " + java.ASC_AES(0,before, key0);
+        var resultInput = document.querySelector('.user-box input[type="text"][name="result"]');
+        var resultLabel = resultInput.nextElementSibling;
+        resultLabel.classList.add('shrink');
+        resultInput.value = result
+    }
+
+    function acc_aes1(){
+        var before = document.getElementById("before").value;
+        var key0 = document.getElementById("key").value;
+        result =  "解密结果: " + java.ASC_AES(1,before, key0);
+        var resultInput = document.querySelector('.user-box input[type="text"][name="result"]');
+        var resultLabel = resultInput.nextElementSibling;
+        resultLabel.classList.add('shrink');
+        resultInput.value = result
+    }
+
+    function switch_to3(){
+        java.switch_to3();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var contentInput = document.querySelector('.user-box input[type="text"]');
+        var keyInput = document.querySelector('.user-box input[type="text"][name="key"]');
+        var resultInput = document.querySelector('.user-box input[type="text"][name="result"]');
+        var resultLabel = resultInput.nextElementSibling;
+        var encryptBtn = document.querySelectorAll('.aes-box a')[0];
+        var decryptBtn = document.querySelectorAll('.aes-box a')[1];
+        var attack = document.querySelectorAll('.aes-box a')[2];
+
+        function applyLabelStyle() {
+            resultLabel.classList.add('shrink');
+        }
+
+        function getSelectedEncryptionLevel() {
+            var encryptionLevels = document.getElementsByName('encryption');
+            for (var i = 0; i < encryptionLevels.length; i++) {
+                if (encryptionLevels[i].checked) {
+                    return encryptionLevels[i].value;
+                }
+            }
+            return null;
+        }
+
+        encryptBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            var encryptionLevel = getSelectedEncryptionLevel();
+            var result;
+            if (encryptionLevel === "single") {
+                result = singleEncrypt();
+            } else if (encryptionLevel === "double") {
+                result = doubleEncrypt();
+            } else if (encryptionLevel === "triple") {
+                result = tripleEncrypt();
+            }
+            applyLabelStyle();
+            resultInput.value = result;
+        });
+
+        decryptBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            var encryptionLevel = getSelectedEncryptionLevel();
+            var result;
+            if (encryptionLevel === "single") {
+                result = singleDecrypt();
+            } else if (encryptionLevel === "double") {
+                result = doubleDecrypt();
+            } else if (encryptionLevel === "triple") {
+                result = tripleDecrypt();
+            }
+            applyLabelStyle();
+            resultInput.value = result;
+        });
+
+        attack.addEventListener("click", function (event){
+            event.preventDefault();
+            java.switch_to();
+        });
+
+    });
+
+</script>
+</head>
+<body>
+<div class="aes-box">
+    <h2>AES加密</h2>
+    <form>
+        <div class="user-box">
+            <input type="text" id="before" required="">
+            <label>请输入加密/解密的内容</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="key" id="key" required="">
+            <label>请输入密钥</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="result" required="" readonly>
+            <label>结果展示</label>
+        </div>
+        <div class="encryption-level">
+            <input type="radio" id="single" name="encryption" value="single" checked>
+            <label for="single">一重加密</label>
+            <input type="radio" id="double" name="encryption" value="double">
+            <label for="double">二重加密</label>
+            <input type="radio" id="triple" name="encryption" value="triple">
+            <label for="triple">三重加密</label>
+        </div>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            加密
+        </a>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            解密
+        </a>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            密钥破解
+        </a>
+        <div>
+            <a href="#" onclick="acc_aes0()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                字符加密
+            </a>
+            <a href="#" onclick="acc_aes1()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                字符解密
+            </a>
+            <a href="#" onclick="switch_to3()" style="width: 30px;padding-left: 9px; padding-top: 9px; ">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                CBC
+            </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
